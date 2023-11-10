@@ -1,186 +1,179 @@
 # Ex-08-Data-Visualization-
 # AIM
+
 To Perform Data Visualization on a complex dataset and save the data to a file.
 
 # Explanation
 Data visualization is the graphical representation of information and data. By using visual elements like charts, graphs, and maps, data visualization tools provide an accessible way to see and understand trends, outliers, and patterns in data.
 
 # ALGORITHM
-## STEP 1
-Read the given Data
+- STEP 1:
+ Read the given Data
+- STEP 2:
+ Clean the Data Set using Data Cleaning Process
+- STEP 3:
+ Apply Feature generation and selection techniques to all the features of the data set
+- STEP 4:
+ Apply data visualization techniques to identify the patterns of the data.
 
-## STEP 2
-Clean the Data Set using Data Cleaning Process
-
-## STEP 3
-Apply Feature generation and selection techniques to all the features of the data set
-
-## STEP 4
-Apply data visualization techniques to identify the patterns of the data.
-
-# CODE
+# PROGRAM:
+```
+Developed By: gunupati dheeraj
+Reg No: 212221040050
+```
+### READING THE GIVEN FILES
 ```python
-import matplotlib.pyplot as plt
+import pandas as pd
+df=pd.read_csv("/content/Superstore.csv",encoding='unicode_escape')
+df.head()
+```
+### DATA VISUALIZATION USING SEABORN :
+```
 import seaborn as sns
-import numpy as np
-df=sns.load_dataset("tips")
-df=df.head(10)
-df
+from matplotlib import pyplot as plt
 ```
-# OUTPUT
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/0a83555e-b1f9-406c-a28f-34fdb900dad1)
-
-# Line graphs
-```using seaborn```
+- <B>_LINE PLOT:_</B>
 ```python
-sns.lineplot(data=df,x="total_bill",y="tip")
+plt.figure(figsize=(9,6))
+sns.lineplot(x="Segment",y="Region",data=df,marker='o')
+plt.xticks(rotation = 90)
+sns.lineplot(x='Ship Mode',y='Category', hue ="Segment",data=df)
+sns.lineplot(x="Category",y="Sales",data=df,marker='o')
 ```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/72a93650-4d8b-47f0-b0ea-8bd0c040a9f3)
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/ebf5d018-c31c-4610-b26e-6395daeb5448" height=300 width=350>
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/f50bd4c8-8840-4d61-afa9-f090d98716d2" height=300 width=350>
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/dddc0ce1-5d37-463d-af9d-d9a39cf33def" height=300 width=350>
 
-``` using matplot```
+- <B>_SCATTERPLOT:_</B>
 ```python
-x=df["total_bill"]
-y=df["tip"]
-plt.plot(x,y)
-plt.xlabel("Total_bill")
-plt.ylabel("Tip")
-plt.title("Total_bill and Tip")
+sns.scatterplot(x='Category',y='Sub-Category',data=df)
+sns.scatterplot(x='Category', y='Sub-Category', hue ="Segment",data=df)
+plt.figure(figsize=(10,7))
+sns.scatterplot(x="Region",y="Sales",data=df)
+plt.xticks(rotation = 90)
+```
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/23b30b9e-cb60-4dd5-a7a7-be941b7e291d" height=300 width=350>
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/e422342a-4fff-487e-9780-aa92e2db6b19" height=300 width=350>
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/8f9e780a-bcdd-47e0-a21e-25e8dca37cab" height=300 width=350>
+
+- <B>_BOXPLOT:_</B>
+```python
+sns.boxplot(x="Sub-Category",y="Discount",data=df)
+sns.boxplot( x="Profit", y="Category",data=df)
+```
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/68af3f52-c256-452b-b987-afc6767d09ac" height=300 width=350>
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/27f1e245-2725-436d-a68b-df3b3c5c1660" height=300 width=350>
+
+- <B>_VIOLIN PLOT:_</B>
+```python
+sns.violinplot(x="Profit",data=df)
+```
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/19b590d7-641d-47ed-af0f-40e52df39587" height=300 width=350>
+
+- <B>_BARPLOT_</B>
+```python
+sns.barplot(x="Sub-Category",y="Sales",data=df)
+plt.xticks(rotation = 90)
+sns.barplot(x="Category",y="Sales",data=df)
+plt.xticks(rotation = 90)
+```
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/16ece634-b224-42df-82be-c4a731f908af" height=500 width=350>
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/32fcf2ae-85be-4bfa-bacb-0839304efe5b" height=300 width=350>
+
+- <B>_POINTPLOT_</B>
+```python
+sns.pointplot(x=df["Quantity"],y=df["Discount"])
+```
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/cc5c01fb-bc88-4f6e-8f53-08e45f679e08" height=300 width=350>
+
+- <B>_COUNT PLOT_</B>
+```python
+sns.countplot(x="Category",data=df)
+sns.countplot(x="Sub-Category",data=df)
+```
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/b6e8298d-0a6c-4a58-85b6-6a0e5c53508f" height=300 width=350>
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/a9e07021-4889-490c-8451-69864bf6f778" height=300 width=350>
+
+- <B>_HISTOGRAM_</B>
+```python
+sns.histplot(data=df,x ='Ship Mode',hue='Sub-Category')
+``` 
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/6e5a4fab-1cfd-4415-9a76-6e398571742b" height=300 width=350>
+
+- <B>_KDE PLOT_</B>
+```python
+sns.kdeplot(x="Profit", data = df,hue='Category')
+```
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/2129a043-381c-4b04-a0da-5b6745ba0adf" height=300 width=350>
+
+### DATA VISUALIZATION USING MATPLOTLIB :
+- <B>_PLOT_</B>
+```python
+plt.plot(df['Category'], df['Sales'])
 plt.show()
 ```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/df30ab3f-2d7f-4a9e-967e-4c60cbeb5fe4)
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/5f621aad-c520-4e01-96cf-1701acefa1e7" height=300 width=350>
 
-# Area chart
-```using matplot```
+
+- <B>_HEATMAP:_</B>
 ```python
-x=df["total_bill"]
-y1=df["tip"]
-y2=df["size"]
-plt.fill_between(x,y1,color='yellow')
-plt.fill_between(x,y2,color='black')
-plt.plot(x,y1,color='red')
-plt.plot(x,y2,color='violet')
-plt.legend(['y1','y2'])
+df.corr()
+plt.subplots(figsize=(12,7))
+sns.heatmap(df.corr(),annot=True)
+```
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/d133809e-1704-4f91-8332-0041d7ca3e33" height=300 width=350>
+
+- <B>_PIECHART:_</B>
+```python
+df1=df.groupby(by=["Ship Mode"]).sum()
+labels=[]
+for i in df1.index:
+    labels.append(i)
+colors=sns.color_palette("bright")
+plt.pie(df1["Sales"],labels=labels,autopct="%0.0f%%")
+plt.show()
+
+df3=df.groupby(by=["Category"]).sum()
+labels=[]
+for i in df3.index:
+    labels.append(i) 
+plt.figure(figsize=(8,8))
+colors = sns.color_palette('pastel')
+plt.pie(df3["Profit"],colors = colors,labels=labels, autopct = '%0.0f%%')
 plt.show()
 ```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/e5d1393e-ec72-4b93-a2d0-da914597f81b)
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/09b81541-1b03-4017-bd64-e20c6894898b" height=300 width=350>
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/76eb96a0-0bec-4d40-af21-f906b45b9c16" height=300 width=350>
 
-# bar chart
-```using matplot```
+- <B>_HISTOGRAM:_</B>
 ```python
-values=df["tip"]
-names=df["sex"]
-plt.bar(names,values,color="teal")
+plt.hist(df["Sub-Category"],facecolor="peru",edgecolor="blue",bins=10)
 plt.show()
 ```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/23b02249-2238-4155-88d8-ca8fcfdf5506)
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/5d549a00-18a3-4126-af87-1652098f826d" height=300 width=350>
 
-```using seaborn```
+- <B>_BARGRAPH:_</B> 
 ```python
-sns.barplot(data=df1,x='day',y='total_bill',hue='sex',palette='Set1')
-plt.xlabel('day of the week')
-plt.ylabel('Total Bill')
-plt.title('Total Bill by day and Gender')
-```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/998e4d64-1dcd-4b7d-948b-577a56fc1b2b)
-
-# SCATTER PLOT
-```using matplot```
-```python
-plt.scatter(x=df['total_bill'],y=df["tip"],s=50,color='orange')
+plt.bar(df.index,df['Category'])
 plt.show()
 ```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/1c01f62f-dec1-4c19-a280-6dd2377fc2c2)
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/bee209ed-e0f9-4968-94c7-babc9140edfb" height=300 width=350>
 
-```using seaborn```
+- <B>_SCATTERPLOT:_</B>
 ```python
-sns.scatterplot(data=df,x='total_bill',y='tip',hue='sex',palette='Set1')
-plt.xlabel('day of the week')
-plt.ylabel('Total Bill')
-plt.title('Total Bill by day and Gender')
+plt.scatter(df["Region"],df["Profit"], c ="blue")
+plt.show() 
+```
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/82653e8a-3f2a-4a58-ae41-0631925cd402" height=300 width=350>
+
+- <B>_BOXPLOT:_</B>
+```python
+plt.boxplot(x="Sales",data=df)
 plt.show()
 ```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/6113bc5d-5cf4-461b-951e-056c48c77d0c)
+<img src="https://github.com/Janarthanan2/ODD2023-Datascience-Ex-08/assets/119393515/9515bcd2-15ba-453a-a02e-e3e6e3ea875c" height=300 width=350>
 
-#HISTOGRAM
-```using matplot```
-```python
-x=df['total_bill']
-range=(0,100)
-bins=10
-plt.hist(x,bins,range,color='red',histtype='bar',rwidth=0.8)
-plt.title('my Histogram')
-plt.show()
-```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/1beb0151-469c-4a14-99ee-bb84e3448cd2)
+# Inference:
 
-```using seaborn```
-```python
-sns.histplot(data=df,x='total_bill',y=df['tip'])
-plt.xlabel('Total Bill')
-plt.ylabel('Tip')
-plt.title('Total Bill by day and Gender')
-plt.show()
-```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/26e8697d-6136-4a42-a886-5fc61e3c8db6)
-
-# BOX PLOT
-```using matplot```
-```python
-plt.boxplot(df['tip'])
-plt.show()
-```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/bde632b5-7462-4c97-abf7-2e3f6eee52f5)
-
-```using seaborn```
-```python
-sns.boxplot(data=df,x='day',y='total_bill',hue=df['sex'])
-plt.xlabel('Total Bill')
-plt.ylabel('Tip')
-plt.title('Total Bill by day and Gender')
-plt.show()
-```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/2f6e9a1c-6101-4d36-b6e4-6a269bccf59d)
-
-# violin plot
-```python
-sns.violinplot(data=df,x='day',y='total_bill',hue=df['sex'])
-plt.xlabel('Total Bill')
-plt.ylabel('Tip')
-plt.title('Total Bill by day and Gender')
-plt.show()
-```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/72d9d419-f020-449e-8538-1292c10c5d86)
-
-# # KDE PLOT
-```python
-sns.kdeplot(data=df,x='tip')
-plt.xlabel('Total Bill')
-plt.ylabel('Tip')
-plt.title('Total Bill by day and Gender')
-plt.show()
-```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/a532cdae-c4b0-4ec8-a080-ec8b30606de7)
-
-# Heat Map
-```python
-data=np.random.randint(low=1,high=100,size=(10,10))
-sns.heatmap(data=data,annot=True)
-```
-## output
-![image](https://github.com/Vijisdurai/ODD2023-Datascience-Ex-08/assets/118343184/6f7a2a5c-1872-416c-8396-5d4c67a19bd7)
-
-
-
+# RESULT:
+Hence, Data Visualization is applied on the complex dataset using libraries like Seaborn and Matplotlib successfully and the data is saved to file.
